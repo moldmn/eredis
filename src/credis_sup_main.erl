@@ -18,5 +18,6 @@ start_link() ->
 %% ===================================================================
 
 init([]) ->
-    {ok, { {one_for_one, 5, 10}, [?CHILD(credis_sup_monitor, supervisor), ?CHILD(credis_pool_sup, supervisor)]}}.
+    {ok, { {one_for_one, 5, 10}, []}}.
+    %{ok, { {one_for_one, 5, 10}, [?CHILD(credis_sup_monitor, supervisor), ?CHILD(credis_pool_sup, supervisor)]}}.
 
