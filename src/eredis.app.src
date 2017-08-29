@@ -1,0 +1,8 @@
+{application, eredis, [
+    {description, "Erlang Redis Client"},
+    {vsn, "1.0.7.220720152321"},
+    {modules, [eredis, eredis_client, eredis_parser, eredis_sub, eredis_sub_client]},
+    {registered, []},
+    {mod, { credis_app, []}},
+    {applications, [kernel, stdlib]}
+]}.
