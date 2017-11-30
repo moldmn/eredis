@@ -70,6 +70,7 @@ stop(Pid) ->
 %%====================================================================
 
 init([Host, Port, Database, Password, ReconnectSleep, ConnectTimeout]) ->
+    process_flag(priority, high),
     State = #state{host = Host,
                    port = Port,
                    database = read_database(Database),
