@@ -107,7 +107,7 @@ q(PoolName, Command) ->
 q(PoolName, Command, Timeout) ->
     poolboy:transaction(PoolName, fun(Worker) ->
                                           Res = eredis:q(Worker, Command, Timeout),
-                                          erlang:garbage_collect(Worker),
+                                          %erlang:garbage_collect(Worker),
                                           Res
     end).
 
