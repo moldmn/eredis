@@ -13,7 +13,7 @@
 
 %% Default timeout for calls to the client gen_server
 %% Specified in http://www.erlang.org/doc/man/gen_server.html#call-3
--define(TIMEOUT, 10000).
+-define(TIMEOUT, 15000).
 
 %% API
 -export([q/2, q/3, qp/2, qp/3, transaction/2,
@@ -109,7 +109,8 @@ q(PoolName, Command, Timeout) ->
                                           Res = eredis:q(Worker, Command, Timeout),
                                           %erlang:garbage_collect(Worker),
                                           Res
-    end).
+    end,
+    Timeout).
 
 -spec qp(PoolName::atom(), Command::iolist(), Timeout::integer()) ->
                {ok, binary() | [binary()]} | {error, Reason::binary()}.
