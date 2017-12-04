@@ -109,7 +109,13 @@ q_noreply(Client, Command) ->
 
 call(Client, Command, Timeout) ->
     Request = {request, create_multibulk(Command)},
-    gen_server:call(Client, Request, Timeout).
+
+    Start = bws_utils:now_ts(),
+    Result = gen_server:call(Client, Request, Timeout),
+    Finish = bws_utils:now_ts(),
+    bws_metrics_man:redis_request_time(timer:now_diff(Finish, Start)),
+    Result
+.
 
 pipeline(_Client, [], _Timeout) ->
     [];

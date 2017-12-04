@@ -189,7 +189,12 @@ do_request(_Req, _From, #state{socket = undefined} = State) ->
     {reply, {error, no_connection}, State};
 
 do_request(Req, From, State) ->
-    case gen_tcp:send(State#state.socket, Req) of
+    Start = bws_utils:now_ts(),
+    Result = gen_tcp:send(State#state.socket, Req),
+    Finish = bws_utils:now_ts(),
+    bws_metrics_man:redis_tcp_send_time(timer:now_diff(Finish, Start)),
+
+    case Result of
         ok ->
             NewQueue = queue:in({1, From}, State#state.queue),
             {noreply, State#state{queue = NewQueue}};
