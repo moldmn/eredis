@@ -45,7 +45,7 @@ create_pool(GlobalOrLocal, PoolName, Size, Options)
   when GlobalOrLocal =:= local;
        GlobalOrLocal =:= global ->
 
-    SizeArgs = [{size, Size}, {max_overflow, 400}],
+    SizeArgs = [{size, Size}, {max_overflow, 0}],
     PoolArgs = [{name, {GlobalOrLocal, PoolName}}, {worker_module, eredis}, {strategy, fifo}],
     PoolSpec = poolboy:child_spec(PoolName, PoolArgs ++ SizeArgs, Options),
 

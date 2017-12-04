@@ -13,7 +13,7 @@
 
 %% Default timeout for calls to the client gen_server
 %% Specified in http://www.erlang.org/doc/man/gen_server.html#call-3
--define(TIMEOUT, 5000).
+-define(TIMEOUT, 10000).
 
 %% API
 -export([q/2, q/3, qp/2, qp/3, transaction/2,
